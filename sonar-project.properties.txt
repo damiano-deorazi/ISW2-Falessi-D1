@@ -1,0 +1,33 @@
+sonar.projectKey=damiano-deorazi_ISW2-falessi-D1
+sonar.projectName=ISW2-falessi-D1
+
+# =====================================================
+#   Meta-data for the project
+# =====================================================
+
+sonar.links.homepage=https://github.com/damiano-deorazi/ISW2-falessi-D1
+sonar.links.ci=https://travis-ci.org/damiano-deorazi/ISW2-falessi-D1
+sonar.links.scm=https://github.com/damiano-deorazi/ISW2-falessi-D1
+sonar.links.issue=https://github.com/damiano-deorazi/ISW2-falessi-D1/issues
+
+
+# =====================================================
+#   Properties that will be shared amongst all modules
+# =====================================================
+
+sonar.host.url=https://sonarcloud.io
+sonar.organization=damiano-deorazi
+sonar.login=ca99b27c6093933bce43e564e111b971ad50f314
+sonar.sources=src
+sonar.language=java
+
+
+
+# =====================================================
+#   Java config
+# =====================================================
+sonar.java.source=1.8
+sonar.java.binaries=.
+
+# Debug
+sonar.verbose=true
