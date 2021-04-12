@@ -7,7 +7,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,10 +50,22 @@ public class RetrieveTicketsID {
 		}
 	}
 
-	public ArrayList<String> getTicketsID() throws IOException, JSONException {
+	private void addDate(String resDate, HashMap<String, Integer> bugsFixed) {
+		if (bugsFixed.containsKey(resDate)) {
+			Integer n = bugsFixed.get(resDate);
+			n = n + 1;
+			bugsFixed.put(resDate, n);
+		} else {
+			bugsFixed.put(resDate, 1);
+		}
+	}
+	
+	public HashMap<String, Integer> getTicketsID() throws IOException, JSONException, ParseException {
 		String projName ="DAFFODIL";
 		Integer j = 0, i = 0, total = 1;
-		ArrayList<String> ticketsID = new ArrayList<String>();
+		HashMap<String, Integer> bugsFixed = new HashMap<String, Integer>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+
 		//Get JSON API for closed bugs w/ AV in the project
 		do {
 		   //Only gets a max of 1000 at a time, so must do this multiple times if bugs >1000
@@ -65,10 +79,12 @@ public class RetrieveTicketsID {
 		   total = json.getInt("total");
 		   for (; i < total && i < j; i++) {
 			   //Iterate through each bug
-			   String key = issues.getJSONObject(i%1000).get("key").toString();
-			   ticketsID.add(key);
+			   String date = issues.getJSONObject(i%1000).getJSONObject("fields").getString("resolutiondate");
+			   String resDate = dateFormat.format(dateFormat.parse(date));
+			   addDate(resDate, bugsFixed);
 		   }  
 		} while (i < total);
-		return ticketsID;
+		return bugsFixed;
 	}
+
 }
