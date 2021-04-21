@@ -40,14 +40,6 @@ public class GitCommitMsg {
 					Date authorDate = authorIdent.getWhen();
 					//Confronta le date e prende quella più recente, ignorando tutto tranne il mese e l'anno
 					if (date == null || authorDate.after(date)) {
-//						Calendar calendar = Calendar.getInstance();
-//						calendar.setTime(authorDate);
-//						calendar.set(Calendar.HOUR_OF_DAY, 0);
-//					    calendar.set(Calendar.MINUTE, 0);
-//					    calendar.set(Calendar.SECOND, 0);
-//					    calendar.set(Calendar.MILLISECOND, 0);
-//					    calendar.set(Calendar.DAY_OF_MONTH, 0);
-//					    data = calendar.getTime();
 						date = authorDate;
 					}
 				}

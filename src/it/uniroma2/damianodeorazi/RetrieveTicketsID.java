@@ -8,9 +8,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,22 +49,11 @@ public class RetrieveTicketsID {
 		}
 	}
 
-//	private void addDate(String resDate, HashMap<String, Integer> bugsFixed) {
-//		if (bugsFixed.containsKey(resDate)) {
-//			Integer n = bugsFixed.get(resDate);
-//			n = n + 1;
-//			bugsFixed.put(resDate, n);
-//		} else {
-//			bugsFixed.put(resDate, 1);
-//		}
-//	}
-//	
+
 	public ArrayList<String> getTicketsID() throws IOException, JSONException, ParseException {
 		String projName ="DAFFODIL";
 		Integer j = 0, i = 0, total = 1;
 		ArrayList<String> bugTickets = new ArrayList<>();
-		//HashMap<String, Integer> bugsFixed = new HashMap<String, Integer>();
-		//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
 
 		//Get JSON API for closed bugs w/ AV in the project
 		do {
@@ -80,10 +67,6 @@ public class RetrieveTicketsID {
 		   JSONArray issues = json.getJSONArray("issues");
 		   total = json.getInt("total");
 		   for (; i < total && i < j; i++) {
-			   //Iterate through each bug
-//			   String date = issues.getJSONObject(i%1000).getJSONObject("fields").getString("resolutiondate");
-//			   String resDate = dateFormat.format(dateFormat.parse(date));
-//			   addDate(resDate, bugsFixed);
 			   String key = issues.getJSONObject(i%1000).get("key").toString();
 			   bugTickets.add(key);
 		   }  
